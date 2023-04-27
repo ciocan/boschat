@@ -1,6 +1,4 @@
 import { createTRPCRouter } from "~/server/api/trpc";
-import { s3Router } from "./routers/s3";
-import { weaviateRouter } from "./routers/weaviate";
 import { chatRouter } from "./routers/chat";
 
 /**
@@ -9,8 +7,6 @@ import { chatRouter } from "./routers/chat";
  * All routers added in /api/routers should be manually added here.
  */
 export const appRouter = createTRPCRouter({
-  s3: s3Router,
-  weaviate: weaviateRouter,
   chat: chatRouter,
 });
 

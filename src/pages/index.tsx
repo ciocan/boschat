@@ -2,8 +2,6 @@ import { Text } from "@mantine/core";
 import { type NextPage } from "next";
 import Head from "next/head";
 
-import FileUpload from "~/components/file-upload";
-import FileList from "~/components/file-list";
 import Chat from "~/components/chat";
 import { useUserId } from "~/hooks";
 
@@ -12,15 +10,13 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Chat with large documents</title>
-        <meta name="description" content="Bellingcat Hackhathon" />
+        <title>BOS Chat</title>
+        <meta name="description" content="BOS Chat" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <main className="">
         <div className="container flex h-screen">
-          <div className="flex w-full max-w-sm flex-col bg-[#FBFBFB] p-4">
-            <FileUpload />
-            <FileList />
+          <div className="flex w-full max-w-[200px] flex-col bg-[#FBFBFB] p-4">
             <Text color="dimmed" size="xs" className="sticky bottom-0 mt-auto">
               {userId}
             </Text>

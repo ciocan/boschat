@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { WeaviateStore } from "langchain/vectorstores/weaviate";
 import { OpenAIEmbeddings } from "langchain/embeddings/openai";
-import { OpenAI } from "langchain/llms/openai";
+import { OpenAIChat } from "langchain/llms/openai";
 import { ConversationalRetrievalQAChain } from "langchain/chains";
 import weaviate from "weaviate-ts-client";
 
@@ -15,7 +15,7 @@ export const wvClient = weaviate.client({
   apiKey: new weaviate.ApiKey(env.WEAVIATE_API_KEY),
 });
 
-const model = new OpenAI({ openAIApiKey: env.OPENAI_API_KEY });
+const model = new OpenAIChat({ openAIApiKey: env.OPENAI_API_KEY });
 const embeddings = new OpenAIEmbeddings({ openAIApiKey: env.OPENAI_API_KEY });
 
 export const chatRouter = createTRPCRouter({
@@ -28,25 +28,15 @@ export const chatRouter = createTRPCRouter({
       }),
     )
     .mutation(async ({ input }) => {
-      const { question, userId, history } = input;
+      const { question, history } = input;
 
       const vectorStore = await WeaviateStore.fromExistingIndex(embeddings, {
         client: wvClient,
-        indexName: "Documents",
-        metadataKeys: ["userId"],
+        indexName: "BosChat",
+        metadataKeys: ["url", "title"],
       });
 
-      const chain = ConversationalRetrievalQAChain.fromLLM(
-        model,
-        vectorStore.asRetriever(undefined, {
-          distance: 0,
-          where: {
-            path: ["userId"],
-            operator: "Equal",
-            valueText: userId,
-          },
-        }),
-      );
+      const chain = ConversationalRetrievalQAChain.fromLLM(model, vectorStore.asRetriever());
 
       const chatHistory = history.map((message) => message.text);
       const res = await chain.call({ question, chat_history: chatHistory });
