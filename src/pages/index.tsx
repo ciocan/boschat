@@ -17,6 +17,8 @@ const Home: NextPage = () => {
       <main className="">
         <div className="container flex h-screen">
           <div className="flex w-full max-w-[200px] flex-col bg-[#FBFBFB] p-4">
+            <Text fw="bold" size="lg">BOS Chat</Text>
+            <Text size="xs">DeFi AI assistant</Text>
             <Text color="dimmed" size="xs" className="sticky bottom-0 mt-auto">
               {userId}
             </Text>

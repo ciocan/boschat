@@ -1,7 +1,7 @@
 import { useRef } from "react";
-import { Button, TextInput } from "@mantine/core";
+import { ActionIcon, Button, TextInput } from "@mantine/core";
 import { getHotkeyHandler } from "@mantine/hooks";
-// import { IconSend } from "tabler-icons/react";
+import { IconSend } from "@tabler/icons-react";
 
 import ChatHistory from "./chat-history";
 import { useHistory, useQuestion } from "~/hooks";
@@ -30,7 +30,7 @@ function Chat() {
             Clear messages
           </Button>
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-2 items-center">
           <TextInput
             type="text"
             className="flex-1"
@@ -40,9 +40,9 @@ function Chat() {
             disabled={chatApi.isLoading}
             onKeyDown={getHotkeyHandler([["Enter", handleSend]])}
           />
-          <Button variant="filled" color="blue" onClick={handleSend} loading={chatApi.isLoading}>
-            Send
-          </Button>
+          <ActionIcon variant="filled" title="send" onClick={handleSend} loading={chatApi.isLoading}>
+            <IconSend size={18} />
+          </ActionIcon>
         </div>
       </div>
     </>
