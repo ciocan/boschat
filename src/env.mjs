@@ -11,6 +11,7 @@ const server = z.object({
   WEAVIATE_API_KEY: z.string(),
   //
   OPENAI_API_KEY: z.string(),
+  HELICONE_API_KEY: z.string(),
 });
 
 /**
@@ -38,6 +39,7 @@ const processEnv = {
   WEAVIATE_API_KEY: process.env.WEAVIATE_API_KEY,
   //
   OPENAI_API_KEY: process.env.OPENAI_API_KEY,
+  HELICONE_API_KEY: process.env.HELICONE_API_KEY,
 };
 
 // Don't touch the part below

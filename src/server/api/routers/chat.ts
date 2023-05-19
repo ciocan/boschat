@@ -15,8 +15,28 @@ export const wvClient = weaviate.client({
   apiKey: new weaviate.ApiKey(env.WEAVIATE_API_KEY),
 });
 
-const model = new OpenAIChat({ openAIApiKey: env.OPENAI_API_KEY });
-const embeddings = new OpenAIEmbeddings({ openAIApiKey: env.OPENAI_API_KEY });
+const model = new OpenAIChat(
+  { openAIApiKey: env.OPENAI_API_KEY },
+  {
+    basePath: "https://oai.hconeai.com/v1",
+    baseOptions: {
+      headers: {
+        "Helicone-Auth": `Bearer ${env.HELICONE_API_KEY}`,
+      },
+    },
+  },
+);
+const embeddings = new OpenAIEmbeddings(
+  { openAIApiKey: env.OPENAI_API_KEY },
+  {
+    basePath: "https://oai.hconeai.com/v1",
+    baseOptions: {
+      headers: {
+        "Helicone-Auth": `Bearer ${env.HELICONE_API_KEY}`,
+      },
+    },
+  },
+);
 
 export const chatRouter = createTRPCRouter({
   prompt: publicProcedure

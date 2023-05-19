@@ -30,7 +30,7 @@ function Chat() {
             Clear messages
           </Button>
         </div>
-        <div className="flex gap-2 items-center">
+        <div className="flex items-center gap-2">
           <TextInput
             type="text"
             className="flex-1"
@@ -40,7 +40,12 @@ function Chat() {
             disabled={chatApi.isLoading}
             onKeyDown={getHotkeyHandler([["Enter", handleSend]])}
           />
-          <ActionIcon variant="filled" title="send" onClick={handleSend} loading={chatApi.isLoading}>
+          <ActionIcon
+            variant="filled"
+            title="send"
+            onClick={handleSend}
+            loading={chatApi.isLoading}
+          >
             <IconSend size={18} />
           </ActionIcon>
         </div>
