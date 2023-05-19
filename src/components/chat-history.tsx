@@ -1,7 +1,9 @@
-import { Flex, Group, Loader, Stack, Text, ThemeIcon } from "@mantine/core";
+import { Accordion, Flex, Group, Loader, Stack, Text, ThemeIcon } from "@mantine/core";
 import { IconRobot, IconUser } from "@tabler/icons-react";
+import Link from "next/link";
 
 import { useHistory } from "~/hooks";
+import { type Source } from "~/state";
 
 function ChatHistory({ isLoading = false }: { isLoading?: boolean }) {
   const { history } = useHistory();
@@ -17,6 +19,7 @@ function ChatHistory({ isLoading = false }: { isLoading?: boolean }) {
             </ThemeIcon>
             <Text size="sm" className="">
               {item.text}
+              {isAi && <Sources list={item.source} />}
             </Text>
           </Flex>
         );
@@ -32,5 +35,32 @@ function ChatHistory({ isLoading = false }: { isLoading?: boolean }) {
     </Stack>
   );
 }
+
+const Sources = ({ list }: { list?: Source[] }) => {
+  console.log(list);
+  return (
+    <Accordion defaultValue="sources">
+      <Accordion.Item value="souces">
+        <Accordion.Control className="text-xs text-gray-400">Sources</Accordion.Control>
+        <Accordion.Panel>
+          <Stack spacing="xs">
+            {list?.map((item, index) => (
+              <Link key={index} href={item.url} target="_blank" className="no-underline">
+                <Stack bg="white" p="xs" spacing={0}>
+                  <Text size="xs" fw="bold" className="text-gray-400">
+                    {item.title}
+                  </Text>
+                  <Text size="xs" className="text-gray-400">
+                    {item.url}
+                  </Text>
+                </Stack>
+              </Link>
+            ))}
+          </Stack>
+        </Accordion.Panel>
+      </Accordion.Item>
+    </Accordion>
+  );
+};
 
 export default ChatHistory;
