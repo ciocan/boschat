@@ -9,8 +9,8 @@ export const useChatApi = ({ scrollToBottom }: { scrollToBottom: () => void }) =
   const { question, setQuestion } = useQuestion();
 
   const chatApi = api.chat.prompt.useMutation({
-    onSuccess: (text) => {
-      addToHistory({ agent: "ai", text });
+    onSuccess: (message) => {
+      addToHistory({ agent: "ai", ...message });
       setQuestion("");
       scrollToBottom();
     },

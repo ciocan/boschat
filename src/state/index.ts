@@ -2,9 +2,15 @@ import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 import { useState, useEffect } from "react";
 
+export interface Source {
+  url: string;
+  title: string;
+}
+
 export interface Message {
   agent: "human" | "ai";
   text: string;
+  source?: Source[];
 }
 
 interface AppState {
