@@ -24,7 +24,7 @@ npm install
 4. Copy the .env.example into .env file and add the following variables:
 
 ```bash
-WEAVIATE_HOST= # do not use https:// just the domain like bellingcat-xxx.weaviate.network
+WEAVIATE_HOST= # use just domain without https://
 WEAVIATE_API_KEY=
 
 # open ai key
