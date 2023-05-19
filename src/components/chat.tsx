@@ -21,7 +21,7 @@ function Chat() {
   return (
     <>
       <div className="flex-1 overflow-y-auto bg-white p-8">
-        <ChatHistory />
+        <ChatHistory isLoading={chatApi.isLoading} />
         <div ref={messagesEndRef} />
       </div>
       <div className="sticky bottom-0 p-8">
@@ -44,7 +44,7 @@ function Chat() {
             variant="filled"
             title="send"
             onClick={handleSend}
-            loading={chatApi.isLoading}
+            disabled={chatApi.isLoading}
           >
             <IconSend size={18} />
           </ActionIcon>

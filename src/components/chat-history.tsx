@@ -1,9 +1,9 @@
-import { Flex, Stack, Text, ThemeIcon } from "@mantine/core";
+import { Flex, Group, Loader, Stack, Text, ThemeIcon } from "@mantine/core";
 import { IconRobot, IconUser } from "@tabler/icons-react";
 
 import { useHistory } from "~/hooks";
 
-function ChatHistory() {
+function ChatHistory({ isLoading = false }: { isLoading?: boolean }) {
   const { history } = useHistory();
 
   return (
@@ -21,6 +21,14 @@ function ChatHistory() {
           </Flex>
         );
       })}
+      {isLoading && (
+        <Group className="bg-slate-50 p-4" spacing={0}>
+          <ThemeIcon color="gray" size={24} radius="xl" mr="sm">
+            <IconRobot size={18} />
+          </ThemeIcon>
+          <Loader size="xs" variant="dots" color="gray" />
+        </Group>
+      )}
     </Stack>
   );
 }
