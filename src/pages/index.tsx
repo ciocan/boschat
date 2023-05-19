@@ -1,6 +1,8 @@
-import { Text } from "@mantine/core";
+import { ActionIcon, Button, Group, Stack, Text, ThemeIcon } from "@mantine/core";
+import { IconBrandGithub } from "@tabler/icons-react";
 import { type NextPage } from "next";
 import Head from "next/head";
+import Link from "next/link";
 
 import Chat from "~/components/chat";
 import { useUserId } from "~/hooks";
@@ -21,9 +23,23 @@ const Home: NextPage = () => {
               BOS Chat
             </Text>
             <Text size="xs">DeFi AI assistant</Text>
-            <Text color="dimmed" size="xs" className="sticky bottom-0 mt-auto">
-              {userId}
-            </Text>
+            <Stack className="sticky bottom-0 mt-auto" spacing="xs">
+              <Group>
+                <ActionIcon
+                  component={Link}
+                  href="https://github.com/ciocan/boschat"
+                  target="_blank"
+                  variant="subtle"
+                >
+                  <ThemeIcon color="gray">
+                    <IconBrandGithub size={18} />
+                  </ThemeIcon>
+                </ActionIcon>
+                <Text color="dimmed" size="xs">
+                  {userId}
+                </Text>
+              </Group>
+            </Stack>
           </div>
           <div className="flex flex-1 flex-col">
             <Chat />
